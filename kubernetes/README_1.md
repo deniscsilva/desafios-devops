@@ -17,7 +17,7 @@ A aplicação Node.js está localizada no diretório `app/` e o `Dockerfile` na 
     ```
     Esta imagem será a versão inicial da sua aplicação.
 
-3.  **Construa a imagem Docker com a tag `latest`:**
+3.  **Como boa prática construa a imagem Docker com a tag `latest`:**
     ```bash
     docker build -t desafio-kubernetes:latest .
     ```
