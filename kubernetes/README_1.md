@@ -63,37 +63,9 @@ Os manifestos do Kubernetes estão localizados no diretório `k8s/`.
     ```
 
 *   **`k8s/deployment.yaml`**:
-    Define um `Deployment` chamado `app-deployment` no namespace `desafio-devops`. Ele garante que uma réplica do pod da aplicação esteja rodando. O pod usa a imagem `desafio-kubernetes:latest`, expõe a porta 3000 e injeta as variáveis do `ConfigMap`.
-
-    ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: app-deployment
-      namespace: desafio-devops
-    spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: desafio-app
-      template:
-        metadata:
-          labels:
-            app: desafio-app
-        spec:
-          containers:
-          - name: app-container
-            image: desafio-kubernetes:latest
-            imagePullPolicy: IfNotPresent
-            ports:
-            - containerPort: 3000
-            envFrom:
-            - configMapRef:
-                name: app-config
-    ```
-
-*   **`k8s/deployment.yaml` (com limites de recursos):**
-    Para garantir que a aplicação utilize os recursos de forma controlada, foram adicionados limites de CPU e memória. O pod solicitará 32Mi de memória e 125m (ou 0.125 de um core de CPU) e terá um limite máximo de 64Mi de memória e 250m de CPU.
+    Define um `Deployment` chamado `app-deployment` no namespace `desafio-devops`. Ele garante que uma réplica do pod da aplicação esteja rodando. O pod usa a imagem `desafio-kubernetes:v1`, expõe a porta 3000 e injeta as variáveis do `ConfigMap`.
+    
+    Para garantir que a aplicação utilize os `recursos` de forma controlada, foram adicionados `limites de CPU e memória`. O pod solicitará 32Mi de memória e 125m de CPU e terá um limite máximo de 64Mi de memória e 250m de CPU.
 
     ```yaml
     apiVersion: apps/v1
@@ -195,13 +167,12 @@ Dois scripts shell são fornecidos para facilitar o deploy e a exclusão dos rec
     ```bash
     #!/bin/bash
 
-    # Apply Kubernetes manifests
+    echo "deployando objetos..."
     kubectl apply -f k8s/configmap.yaml
     kubectl apply -f k8s/deployment.yaml
     kubectl apply -f k8s/service.yaml
     kubectl apply -f k8s/ingress.yaml
-
-    echo "Kubernetes resources applied successfully."
+    echo "Aplicado com sucesso."
     ```
 
 *   **`delete-app.sh`**:
@@ -209,12 +180,12 @@ Dois scripts shell são fornecidos para facilitar o deploy e a exclusão dos rec
 
     ```bash
     #!/bin/bash
-    echo "Deleting Kubernetes resources..."
+    echo "Deletando objetos..."
     kubectl delete -f k8s/ingress.yaml
     kubectl delete -f k8s/service.yaml
     kubectl delete -f k8s/deployment.yaml
     kubectl delete -f k8s/configmap.yaml
-    echo "Kubernetes resources deleted."
+    echo "Objetos deletados."
     ```
 
 ## 6. Processo de Deploy Completo no Minikube
