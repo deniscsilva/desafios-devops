@@ -21,7 +21,6 @@ A aplicação Node.js está localizada no diretório `app/` e o `Dockerfile` na 
     ```bash
     docker build -t desafio-kubernetes:latest .
     ```
-    A tag `latest` é comumente usada para a versão mais recente e estável da aplicação. O `deployment.yaml` está configurado para usar esta tag.
 
 ## 2. Importando Imagens Docker para o Minikube
 
