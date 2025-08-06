@@ -11,7 +11,7 @@ Este projeto Terraform provisiona uma instância EC2 na AWS com as seguintes car
 
 ## Configuração
 
-O projeto utiliza um backend S3 para armazenar o arquivo de estado do Terraform. A configuração do backend está no arquivo `backend.tf`. Certifique-se de que o bucket S3 exista e que você tenha as permissões necess��rias para acessá-lo.
+O projeto utiliza um backend S3 para armazenar o arquivo de estado do Terraform. A configuração do backend está no arquivo `backend.tf`. Certifique-se de que o bucket S3 exista e que você tenha as permissões necessárias para acessá-lo.
 
 As seguintes variáveis podem ser configuradas:
 

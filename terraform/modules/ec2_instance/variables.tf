@@ -1,20 +1,20 @@
 variable "instance_type" {
-  description = "EC2 instance type."
+  description = "EC2 tipo de instancia."
   type        = string
 }
 
 variable "security_group_id" {
-  description = "ID of the security group to associate with the instance."
+  description = "ID do security group para associar à instancia."
   type        = string
 }
 
 variable "key_name" {
-  description = "Name of the SSH key to access the instance."
+  description = "Nome da chave .pem para conetar à instancia."
   type        = string
 }
 
 variable "instance_tag_name" {
-  description = "Tag name for the EC2 instance"
+  description = "Nome da Tag para instancia EC2"
   type        = string
   default     = "Desafio-Terraform"
 }
