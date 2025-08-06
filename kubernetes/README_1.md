@@ -266,7 +266,7 @@ Para remover todos os recursos do Kubernetes e limpar o ambiente:
 
 1.  **Implementado em app/app.js uma rota para o /healthz que retorna HTTP 200 OK e um JSON { status: 'ok' }**
    
-   // Endpoint para healthcheck
+   // Endpoint para health check
    ```yaml
    app.get('/healthz', (req, res) => {
      res.status(200).json({ status: 'ok' });
