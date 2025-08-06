@@ -1,26 +1,67 @@
-# Desafio 01: Infrastructure-as-code - Terraform
+# Documentação do Projeto Terraform
 
-## Motivação
+## Descrição do Projeto
 
-Recursos de infraestrutura em nubvem devem sempre ser criados utilizando gerenciadores de configuração, tais como [Cloudformation](https://aws.amazon.com/cloudformation/), [Terraform](https://www.terraform.io/) ou [Ansible](https://www.ansible.com/), garantindo que todo recurso possa ser versionado e recriado de forma facilitada.
+Este projeto Terraform provisiona uma instância EC2 na AWS com as seguintes características:
 
-## Objetivo
+- Instância Linux (Amazon Linux 2) do tipo `t2.micro`.
+- Acesso HTTP (porta 80) e HTTPS (porta 443) liberado para todos os IPs.
+- Acesso SSH (porta 22) liberado apenas para um IP ou range de IPs específico.
+- Docker é pré-instalado na instância e um container com a imagem do Apache (httpd) é iniciado, expondo a porta 80.
 
-- Criar uma instância **n1-standard-1** (GCP) ou **t2.micro** (AWS) Linux utilizando **Terraform**.
-- A instância deve ter aberta somente às portas **80** e **443** para todos os endereços
-- A porta SSH (**22**) deve estar acessível somente para um _range_ IP definido.
-- **Inputs:** A execução do projeto deve aceitar dois parâmetros:
-  - O IP ou _range_ necessário para a liberação da porta SSH
-  - A região da _cloud_ em que será provisionada a instância
-- **Outputs:** A execução deve imprimir o IP público da instância
+## Configuração
 
+O projeto utiliza um backend S3 para armazenar o arquivo de estado do Terraform. A configuração do backend está no arquivo `backend.tf`. Certifique-se de que o bucket S3 exista e que você tenha as permissões necessárias para acessá-lo.
 
-## Extras
+As seguintes variáveis podem ser configuradas:
 
-- Pré-instalar o docker na instância que suba automáticamente a imagem do [Apache](https://hub.docker.com/_/httpd/), tornando a página padrão da ferramenta visualizável ao acessar o IP público da instância
-- Utilização de módulos do Terraform
+- `aws_region`: Região da AWS para provisionar os recursos. O padrão é `us-east-1`.
+- `ssh_location`: O IP ou range de IPs (formato CIDR) para liberar o acesso SSH. **Este valor precisa ser fornecido.**
+- `key_name`: Nome da chave SSH registrada na AWS para acessar a instância. **Este valor precisa ser fornecido.**
+- `instance_type`: Tipo da instância EC2. O padrão é `t2.micro`.
 
-## Notas
-- Pode se utilizar tanto AWS quanto GCP (Google Cloud), não é preciso executar o teste em ambas, somente uma.
-- Todos os recursos devem ser criados utilizando os créditos gratuitos da AWS/GCP.
-- Não esquecer de destruir os recursos após criação e testes do desafio para não haver cobranças ou esgotamento dos créditos.
+## Como usar
+
+1. **Inicialize o Terraform:**
+
+   ```bash
+   terraform init
+   ```
+2. **Valide a sintaxe dos arquivos**
+   
+    ```bash
+   terraform validate
+   ```
+
+3. **Formate todos arquivos (recursivamente)**
+
+   ```bash
+   terraform fmt --recursive
+   ```
+
+4. **Planeje a infraestrutura:**
+
+   ```bash
+   terraform plan 
+   ```
+
+5. **Aplique as alterações:**
+
+   ```bash
+   terraform apply 
+   ```
+
+6. **Destrua a infraestrutura:**
+
+   ```bash
+   terraform destroy 
+   ```
+
+## Saídas (Outputs)
+
+- `public_ip`: O endereço de IP público da instância EC2.
+
+## Módulos
+
+- **`ec2_instance`**: Módulo responsável por criar a instância EC2, instalar o Docker e iniciar o container do Apache.
+- **`security_group`**: Módulo responsável por criar o Security Group com as regras de firewall.
