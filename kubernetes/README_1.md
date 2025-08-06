@@ -295,12 +295,15 @@ Para remover todos os recursos do Kubernetes e limpar o ambiente:
 1.  **Implementado em app/app.js uma rota para o /healthz que retorna TTP 200 OK e um JSON { status: 'ok' }**
    
    // Endpoint para healthcheck
+   ```json
    app.get('/healthz', (req, res) => {
      res.status(200).json({ status: 'ok' });
    });
-
+   ```
+   
 2.  **Adicionado as Probes Liveness e Readness no arquivo de deployment da app.**
     
+  ```yaml  
   livenessProbe:
     httpGet:
       path: /healthz
@@ -313,4 +316,4 @@ Para remover todos os recursos do Kubernetes e limpar o ambiente:
       port: 3000
     initialDelaySeconds: 5
     periodSeconds: 10 
-
+  ```
