@@ -153,7 +153,7 @@ Os manifestos do Kubernetes estão localizados no diretório `k8s/`.
                 port:
                   number: 80
     ```    
-## 5. Scripts de Gerenciamento
+## 4. Scripts de Gerenciamento
 
 Dois scripts shell são fornecidos para facilitar o deploy e a exclusão dos recursos do Kubernetes.
 
@@ -184,7 +184,7 @@ Dois scripts shell são fornecidos para facilitar o deploy e a exclusão dos rec
     echo "Objetos deletados."
     ```
 
-## 6. Processo de Deploy Completo no Minikube
+## 5. Processo de Deploy Completo no Minikube
 
 Siga estes passos para implantar a aplicação no seu cluster Minikube:
 
@@ -243,7 +243,7 @@ Siga estes passos para implantar a aplicação no seu cluster Minikube:
     Abra seu navegador e acesse: `http://desafio.local`
     Você deverá ver a mensagem "Olá Denis!".
 
-## 7. Limpeza (Excluindo Recursos)
+## 6. Limpeza (Excluindo Recursos)
 
 Para remover todos os recursos do Kubernetes e limpar o ambiente:
 
@@ -262,7 +262,7 @@ Para remover todos os recursos do Kubernetes e limpar o ambiente:
     ```bash
     minikube delete
     ```
-## 8. Implementação do health check
+## 7. Implementação do health check
 
 1.  **Implementado em app/app.js uma rota para o /healthz que retorna HTTP 200 OK e um JSON { status: 'ok' }**
    
