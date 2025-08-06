@@ -152,11 +152,7 @@ Os manifestos do Kubernetes estão localizados no diretório `k8s/`.
                 name: app-service
                 port:
                   number: 80
-    ```
-## 4. Criando namespace no kubernetes
-    
-     $kubectl create namespace desafio-devops
-    
+    ```    
 ## 5. Scripts de Gerenciamento
 
 Dois scripts shell são fornecidos para facilitar o deploy e a exclusão dos recursos do Kubernetes.
@@ -210,13 +206,18 @@ Siga estes passos para implantar a aplicação no seu cluster Minikube:
     minikube addons enable ingress
     ```
 
-4.  **Execute o script de deploy:**
+4. **Crie a namespace**
+    ```bash
+    kubectl create namespace desafio-devops
+    ```
+    
+5.  **Execute o script de deploy:**
     ```bash
     chmod +x deploy-app.sh
     ./deploy-app.sh
     ```
 
-5.  **Verifique o status dos pods e serviços:**
+6.  **Verifique o status dos pods e serviços:**
     ```bash
     kubectl get pods -n desafio-devops
     kubectl get svc -n desafio-devops
@@ -224,7 +225,7 @@ Siga estes passos para implantar a aplicação no seu cluster Minikube:
     ```
     Certifique-se de que os pods estão no estado `Running`.
 
-6.  **Obtenha o IP do Minikube e adicione a entrada no seu arquivo hosts:**
+7.  **Obtenha o IP do Minikube e adicione a entrada no seu arquivo hosts:**
     Para acessar a aplicação via `desafio.local`, você precisa mapear este hostname para o IP do Minikube no seu arquivo `/etc/hosts` (Linux).
 
     Obtenha o IP do Minikube:
@@ -238,7 +239,7 @@ Siga estes passos para implantar a aplicação no seu cluster Minikube:
     192.168.49.2 desafio.local
     ```
 
-7.  **Acesse a aplicação:**
+8.  **Acesse a aplicação:**
     Abra seu navegador e acesse: `http://desafio.local`
     Você deverá ver a mensagem "Olá Denis!".
 
